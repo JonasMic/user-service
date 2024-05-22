@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-svc-deployment
+  namespace: user-app
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-k8s
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: spring-boot-k8s
+    spec:
+      containers:
+        - name: user-app-container
+          image: 'user-newapp:2.0'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9191
